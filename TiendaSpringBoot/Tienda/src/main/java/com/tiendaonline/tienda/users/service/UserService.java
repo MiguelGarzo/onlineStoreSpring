@@ -3,6 +3,7 @@ package com.tiendaonline.tienda.users.service;
 import com.tiendaonline.tienda.exceptions.ApiError;
 import com.tiendaonline.tienda.exceptions.InvalidInputException;
 import com.tiendaonline.tienda.exceptions.NotExistsException;
+import com.tiendaonline.tienda.security.JWTService;
 import com.tiendaonline.tienda.security.JWTUtil;
 import com.tiendaonline.tienda.users.Role;
 import com.tiendaonline.tienda.users.dto.UserLoginDTO;
@@ -23,10 +24,12 @@ import java.util.List;
 public class UserService implements UserDetailsService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final JWTUtil jwtUtil;
 
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder, JWTUtil jwtUtil) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     public UserResponseDTO register(UserRegisterDTO dto) {
@@ -56,7 +59,7 @@ public class UserService implements UserDetailsService {
             throw new InvalidInputException("Invalid Password");
         }
 
-        return JWTUtil.generateToken(user.getEmail(), user.getRole());
+        return jwtUtil.generateToken(user.getEmail(), user.getRole());
     }
 
     @Override

@@ -16,24 +16,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
 
-// Make a table in PostgreSQL
 @Entity
 @Table(name = "products")
 
-// Make the Getters
 @Getter
-
-// Make the Setters
 @Setter
-
-// Make an empty constructor needed for JPA
 @NoArgsConstructor
-
-//Make a full constructor with all the attributes
 @AllArgsConstructor
 public class Product {
-    
-    // Define the PrimaryKey as autogenerate in PostgreSQL
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

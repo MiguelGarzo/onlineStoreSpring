@@ -12,21 +12,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 
-// Make the Getters
 @Getter
-
-// Make the Setters
 @Setter
-
-// Make an empty constructor needed for JPA
 @NoArgsConstructor
-
-//Make a full constructor with all the attributes
 @AllArgsConstructor
 
 public class User {
 
-    // Define the PrimaryKey as autogenerate in PostgreSQL
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
